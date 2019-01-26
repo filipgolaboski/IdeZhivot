@@ -15,10 +15,7 @@ public class ClockController : MonoBehaviour
         if (diff < 0.1f || diff > -0.1f) {
             if (smallHandleFinish)
             {
-                PickableObject p = GetComponentInChildren<PickableObject>();
-                if (p != null) {
-                    p.PickItem();
-                }
+                Finish();
             }
             else
             {
@@ -35,14 +32,20 @@ public class ClockController : MonoBehaviour
         {
             if (bigHandleFinish)
             {
-                PickableObject p = GetComponentInChildren<PickableObject>();
-                if (p != null) { p.PickItem(); }
+                Finish();
             }
             else
             {
                 smallHandleFinish = true;
             }
         }
+    }
+
+    public void Finish()
+    {
+        //do animation here  
+        PickableObject p = GetComponentInChildren<PickableObject>();
+        if (p != null) { p.PickItem(); }
     }
 
 }
