@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b59d07df1a492149a0ee8c0f2cadf0e, type: 3}
   m_Name: FamiliyPortrait
   m_EditorClassIdentifier: 
-  inventoryImage: {fileID: 0}
-  canBeUsed: 0
+  inventoryImage: {fileID: 21300000, guid: fe970a7cdcd0964409d82f257aaae9a5, type: 3}
+  canBeUsed: 1
   canBeViewed: 0
