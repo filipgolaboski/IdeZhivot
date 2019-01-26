@@ -6,5 +6,10 @@ using UnityEngine;
 public class InventoryData : ScriptableObject
 {
     public InventoryItem currentSelectedItem;
-    public InventoryItem[] items;
+    public List<InventoryItem> items;
+
+    public void AddData(InventoryItem inventoryItem)
+    {
+        items.Add(inventoryItem);
+    }
 }
