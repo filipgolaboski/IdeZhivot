@@ -21,6 +21,7 @@ public class NumericCodeSystem : MonoBehaviour
     {
         if (numericCodeData.CheckCode(inputArray))
         {
+            
             onCodeSuccess.Invoke();
         }
         else
@@ -39,7 +40,7 @@ public class NumericCodeSystem : MonoBehaviour
 
     public void SetCodeAt(int val, int position)
     {
-        if(position >= inputArray.Length)
+        if(position < inputArray.Length)
         {
             inputArray[position] = val;
         }
