@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NumericCodeData : MonoBehaviour
+[CreateAssetMenu(menuName = "NumericCodeData")]
+public class NumericCodeData : ScriptableObject
 {
     public int[] codeArray;
 
