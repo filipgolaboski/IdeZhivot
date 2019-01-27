@@ -5,9 +5,9 @@ using UnityEngine.Events;
 
 public class MazeController : MonoBehaviour
 { 
-    public int[,] maze = new int[,] { { 2, 2, 2 }, 
-                                        { 10, 1 ,1} , 
-                                        {2, 2, 20 } };
+    public int[,] maze = new int[,] { { 10, 11, 12 }, 
+                                        { 13, 14 ,15} , 
+                                        {16, 17, 1 } };
     public MazePiece[] mazePiece;
     public MazeFinish[] mazeFinish;
     public MazeMoveSpot mazeMoveSpot;
@@ -17,6 +17,8 @@ public class MazeController : MonoBehaviour
 
     public UnityEvent gameFinished;
     public bool finished = false;
+    public bool spawnFinished;
+    int finishedIndex = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +46,13 @@ public class MazeController : MonoBehaviour
                     MazePiece mp = mazePiece[maze[i, j] - 10];
                     mp.pos = new Vector2(i, j);
                     mp.selectedMaizePiece.AddListener(OnSelectMaizePiece);
+                    if (spawnFinished) {
+                        MazeFinish mf = mazeFinish[finishedIndex];
+                        finishedIndex++;
+                        mf.pos = new Vector2(i, j);
+                        mf.NotifyPointerEnter.AddListener(EnteredFinish);
+                        obj = mf.gameObject;
+                    }
                     mp.transform.SetParent(obj.transform);
                 }
 

@@ -18,6 +18,7 @@ public class MazeFinish : MonoBehaviour, IPointerEnterHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        NotifyPointerEnter.Invoke(this);
+        if (transform.childCount == 0)
+            NotifyPointerEnter.Invoke(this);
     }
 }

@@ -15,7 +15,7 @@ public class MazeMoveSpot : MonoBehaviour, IPointerEnterHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("move");
-        NotifyPointerEnter.Invoke(this);
+        if (transform.childCount == 0)
+            NotifyPointerEnter.Invoke(this);
     }
 }
