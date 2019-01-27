@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class InventoryController : MonoBehaviour
     public SceneController sceneController;
     public CloseItemView closeItemView;
     public SceneView closeViewScene;
-
+    public Image wrong;
     private ItemView[] itemViews;
     private SceneView currentScene;
     private InventoryItem currentItem;
@@ -161,11 +162,22 @@ public class InventoryController : MonoBehaviour
             } 
             else
             {
+                StartCoroutine(ShowX());
                 selectedView.ResetSelectState();
                 ClearSelectedItem();
             }
         }
     }
+
+    IEnumerator ShowX() {
+        wrong.gameObject.SetActive(true);
+        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        pos.z = 0;
+        wrong.transform.position = pos;
+        yield return new WaitForSeconds(0.5f);
+        wrong.gameObject.SetActive(false);
+    }
+
 
     private void UseItemOnPlace(UsePlace usePlace)
     {
