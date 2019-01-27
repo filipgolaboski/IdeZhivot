@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b59d07df1a492149a0ee8c0f2cadf0e, type: 3}
   m_Name: Passport
   m_EditorClassIdentifier: 
-  inventoryImage: {fileID: 21300000, guid: 7fea2bf9c490d0b4b98d813ce0876887, type: 3}
-  canBeUsed: 0
+  inventoryImage: {fileID: 21300000, guid: 16abc6c9ed75d0d40873ab6138eaa80e, type: 3}
   canBeViewed: 1
+  isMinigame: 0
   itemToBeCombined: {fileID: 0}

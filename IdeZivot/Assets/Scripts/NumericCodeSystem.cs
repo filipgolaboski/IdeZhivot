@@ -36,6 +36,7 @@ public class NumericCodeSystem : MonoBehaviour
         {
             inputArray = newInputArray;
         }
+        
     }
 
     public void SetCodeAt(int val, int position)
@@ -44,6 +45,7 @@ public class NumericCodeSystem : MonoBehaviour
         {
             inputArray[position] = val;
         }
+        CheckCode();
     }
 
 }

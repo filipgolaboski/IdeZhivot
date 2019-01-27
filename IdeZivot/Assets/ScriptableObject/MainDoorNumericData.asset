@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08bfb3e93f04e294da780827371b6d1e, type: 3}
   m_Name: MainDoorNumericData
   m_EditorClassIdentifier: 
-  codeArray: 
+  codeArray: 03000000020000000800000001000000
