@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Scissors
   m_EditorClassIdentifier: 
   inventoryImage: {fileID: 21300000, guid: abe46f54a6a539844b1031a898797822, type: 3}
-  canBeUsed: 0
+  canBeUsed: 1
   canBeViewed: 0
+  itemToBeCombined: {fileID: 0}

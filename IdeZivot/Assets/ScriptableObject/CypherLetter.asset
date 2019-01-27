@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: CypherLetter
   m_EditorClassIdentifier: 
   inventoryImage: {fileID: 21300000, guid: 3758b86f38f72d648944c6aa1d49daef, type: 3}
-  canBeUsed: 1
-  canBeViewed: 0
+  canBeUsed: 0
+  canBeViewed: 1
+  itemToBeCombined: {fileID: 11400000, guid: 003fb234d0902c746bc2eb9e453a306a, type: 2}
