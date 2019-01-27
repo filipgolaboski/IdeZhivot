@@ -20,5 +20,4 @@ public class PickableObject : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }

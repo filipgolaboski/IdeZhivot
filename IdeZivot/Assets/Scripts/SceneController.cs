@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class SceneController : MonoBehaviour
 {
     private Stack<SceneView> stack;
-    public SceneView startingScene;
     public Image blackoutImage;
     public InventoryController inventoryController;
     private const float animDuration = 20;
@@ -14,7 +13,6 @@ public class SceneController : MonoBehaviour
     private void Awake()
     {
         stack = new Stack<SceneView>();
-        LoadScene(startingScene);
     }
 
     public void LoadScene(SceneView scene)
@@ -31,7 +29,7 @@ public class SceneController : MonoBehaviour
         }
         scene.ShowScene();
         stack.Push(scene);
-        inventoryController.ListenForPickUpsOnScene(startingScene);
+        inventoryController.ListenForPickUpsOnScene(scene);
         yield return StartCoroutine(ChangeAlpha(1, 0));
     }
 

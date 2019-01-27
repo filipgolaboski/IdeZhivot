@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class SceneView : MonoBehaviour
 {
-    public PickableObject[] pickableObjects;
-    public UsePlace[] usablePlaces;
+    private PickableObject[] pickableObjects;
+    private UsePlace[] usablePlaces;
 
     public delegate void OnPickUpItem(InventoryItem item);
     public OnPickUpItem onPickUpItem;
@@ -15,14 +15,13 @@ public class SceneView : MonoBehaviour
 
     void Start()
     {
-        pickableObjects = GetComponentsInChildren<PickableObject>();
+        pickableObjects = GetComponentsInChildren<PickableObject>(true);
         foreach (var pickable in pickableObjects)
         {
-            pickable.onItemPicked = new ItemPicked();
             pickable.onItemPicked.AddListener(PickUpItem);
         }
 
-        usablePlaces = GetComponentsInChildren<UsePlace>();
+        usablePlaces = GetComponentsInChildren<UsePlace>(true);
         foreach (var place in usablePlaces)
         {
             place.onUsingPlace = UsePlace;

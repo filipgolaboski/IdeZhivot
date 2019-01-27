@@ -36,7 +36,38 @@ public class InventoryController : MonoBehaviour
 
     public void SelectItem(InventoryItem item)
     {
-        currentItem = item;
+        foreach (var view in itemViews)
+        {
+            if (view.IsEmpty())
+            {
+                view.SetView(item.inventoryImage, delegate { SelectItem(item, view); });
+                break;
+            }
+        }
+    }
+
+    public void SelectItem(InventoryItem item, ItemView view)
+    {
+        if (item.canBeViewed) {
+            
+        }
+
+
+        if (item == currentItem)
+        {
+            ClearSelectedItem();
+        }
+        else 
+        {
+            currentItem = item;
+            selectedView = view;
+        }
+    }
+
+    private void ClearSelectedItem()
+    {
+        currentItem = null;
+        selectedView = null;
     }
 
     public void UseItem(UsePlace usePlace)
