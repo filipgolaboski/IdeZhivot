@@ -10,10 +10,14 @@ public class PickableObject : MonoBehaviour
 {
     public InventoryItem inventoryItem;
     public ItemPicked onItemPicked;
+    public AudioSource audioSource;
+    public AudioClip collectClip;
 
     public void PickItem()
     {
         onItemPicked.Invoke(inventoryItem, transform.position);
+        audioSource.clip = collectClip;
+        audioSource.Play();
         Destroy(gameObject);
     }
 }
