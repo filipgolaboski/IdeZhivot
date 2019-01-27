@@ -80,7 +80,6 @@ public class InventoryController : MonoBehaviour
                 closeItemView.SetView(item.inventoryImage, item.itemToBeCombined,
                     (usePlace) => { usePlace.UseItem(currentItem); });
 
-                // view.ResetSelectState();
                 if (closeItem == null)
                 {
                     sceneController.LoadScene(closeViewScene);
@@ -88,6 +87,7 @@ public class InventoryController : MonoBehaviour
                 else if (selectedView != null)
                 {
                     selectedView.ResetSelectState();
+                    currentItem = null;
                 }
                 closeItem = item;
                 selectedView = view;
