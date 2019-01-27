@@ -11,7 +11,6 @@ public class CloseItemView : MonoBehaviour
 
     public void SetView(Sprite sprite, InventoryItem itemToBeUsed, Action<UsePlace> usingItemAction)
     {
-        gameObject.SetActive(true);
         itemSprite.sprite = sprite;
         usePlace.neededItem = itemToBeUsed;
         usePlace.onUsingPlace = usingItemAction.Invoke;

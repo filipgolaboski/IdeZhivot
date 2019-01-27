@@ -13,7 +13,7 @@ public class TVController : MonoBehaviour
 
     private void Awake()
     {
-        TVStateChanged();
+        // TVStateChanged();
     }
 
     public void ChangeChannel()
@@ -40,7 +40,5 @@ public class TVController : MonoBehaviour
         powerOn = !powerOn;
         tvChannels[currentChannel].gameObject.SetActive(powerOn);
         offState.gameObject.SetActive(!powerOn);
-
     }
-    
 }

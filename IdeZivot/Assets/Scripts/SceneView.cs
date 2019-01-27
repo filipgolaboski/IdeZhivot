@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class SceneView : MonoBehaviour
 {
+    public bool displayInventory = true;
+
     private PickableObject[] pickableObjects;
     private UsePlace[] usablePlaces;
 
-    public delegate void OnPickUpItem(InventoryItem item);
+    public delegate void OnPickUpItem(InventoryItem item, Vector2 itemPos);
     public OnPickUpItem onPickUpItem;
     public delegate void OnUsePlace(UsePlace usePlace);
     public OnUsePlace onUsePlace;
@@ -28,9 +30,9 @@ public class SceneView : MonoBehaviour
         }
     }
 
-    private void PickUpItem(InventoryItem item)
+    private void PickUpItem(InventoryItem item, Vector2 itemPos)
     {
-        onPickUpItem?.Invoke(item);
+        onPickUpItem?.Invoke(item, itemPos);
     }
 
     private void UsePlace(UsePlace place)
