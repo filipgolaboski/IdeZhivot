@@ -13,7 +13,7 @@ public class CloseItemView : MonoBehaviour
     {
         itemSprite.sprite = sprite;
         usePlace.neededItem = itemToBeUsed;
-        usePlace.onUsingPlace = usingItemAction.Invoke;
+        usePlace.onUsingPlace += usingItemAction.Invoke;
     }
 
     public void HideView()
