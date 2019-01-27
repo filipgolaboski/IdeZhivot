@@ -13,7 +13,7 @@ public class ClockController : MonoBehaviour
         float twelvePart = rotation / 30;
         float normalTwelvePart = 12 - twelvePart;
         float diff = bigHandleFinal - normalTwelvePart;
-        if ((diff < 0.1f && diff > 0)  || (diff > -0.1f && diff < 0)) {
+        if ((diff < 0.2f && diff > 0)  || (diff > -0.2f && diff < 0) || 12f - normalTwelvePart < 0.2f) {
             if (smallHandleFinish)
             {
                 Finish();
@@ -34,7 +34,7 @@ public class ClockController : MonoBehaviour
         float twelvePart = rotation / 30;
         float normalTwelvePart = 12 - twelvePart;
         float diff = smallHandleFinal - normalTwelvePart;
-        if ((diff < 0.1f && diff > 0) || (diff > -0.1f && diff < 0))
+        if ((diff < 0.2f && diff > 0) || (diff > -0.2f && diff < 0) || 12f - bigHandleFinal < 0.2f)
         {
             if (bigHandleFinish)
             {
