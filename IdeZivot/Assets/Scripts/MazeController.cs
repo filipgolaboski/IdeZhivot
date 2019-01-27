@@ -6,8 +6,8 @@ using UnityEngine.Events;
 public class MazeController : MonoBehaviour
 { 
     public int[,] maze = new int[,] { { 10, 11, 12 }, 
-                                        { 13, 14 ,15} , 
-                                        {16, 17, 1 } };
+                                        { 13, 14 ,15} ,
+                                        { 1, 16, 17 } };
     public MazePiece[] mazePiece;
     public MazeFinish[] mazeFinish;
     public MazeMoveSpot mazeMoveSpot;
@@ -34,39 +34,46 @@ public class MazeController : MonoBehaviour
                 aMax.x += step;
 
                 GameObject obj = null;
-                if (maze[i, j] != 2)
+                if (maze[i, j] != 2 && maze[i, j] < 10)
                 {
                     obj = Instantiate(mazeMoveSpot.gameObject, transform);
+                    obj.SetActive(true);
                     obj.GetComponent<MazeMoveSpot>().pos = new Vector2(i, j);
                     obj.GetComponent<MazeMoveSpot>().NotifyPointerEnter.AddListener(OnMoveSpotEnter);
                 }
 
-                if(maze[i,j] >= 10 && maze[i, j] < 20)
+                if(maze[i,j] >= 10 && maze[i, j] < 100)
                 {
                     MazePiece mp = mazePiece[maze[i, j] - 10];
                     mp.pos = new Vector2(i, j);
                     mp.selectedMaizePiece.AddListener(OnSelectMaizePiece);
+                    mp.gameObject.SetActive(true);
                     if (spawnFinished) {
                         MazeFinish mf = mazeFinish[finishedIndex];
+                        mf.gameObject.SetActive(true);
                         finishedIndex++;
                         mf.pos = new Vector2(i, j);
                         mf.NotifyPointerEnter.AddListener(EnteredFinish);
                         obj = mf.gameObject;
+                        obj.SetActive(true);
                     }
                     mp.transform.SetParent(obj.transform);
                 }
 
-                if (maze[i, j] >= 20)
+                if (maze[i, j] >= 100)
                 {
-                    MazeFinish mp = mazeFinish[maze[i, j] - 20];
+                    MazeFinish mp = mazeFinish[maze[i, j] - 100];
+                    mp.gameObject.SetActive(true);
                     mp.pos = new Vector2(i, j);
                     mp.NotifyPointerEnter.AddListener(EnteredFinish);
                     obj = mp.gameObject;
+                    obj.SetActive(true);
                 }
 
                 if (maze[i,j] == 2)
                 {
                     obj = Instantiate(obstacle, transform);
+                    obj.SetActive(true);
                 }
                
                 obj.GetComponent<RectTransform>().anchorMax = aMax;
