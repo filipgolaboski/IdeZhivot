@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryImage: {fileID: 0}
   canBeUsed: 0
-  canBeViewed: 0
+  canBeViewed: 1
+  itemToBeCombined: {fileID: 0}

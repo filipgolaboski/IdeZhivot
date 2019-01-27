@@ -6,6 +6,8 @@ public class InventoryController : MonoBehaviour
 {
     public Transform inventoryViewsContainer;
     public InventoryData inventoryData;
+    public CloseItemView closeItemView;
+
     private ItemView[] itemViews;
     private SceneView currentScene;
     private InventoryItem currentItem;
@@ -51,9 +53,15 @@ public class InventoryController : MonoBehaviour
         if (item == currentItem)
         {
             ClearSelectedItem();
+            closeItemView.HideView();
         }
         else 
         {
+            if (item.canBeViewed)
+            {
+                closeItemView.SetView(item.inventoryImage, item.itemToBeCombined,
+                    (usePlace) => { usePlace.UseItem(currentItem); });
+            }
             currentItem = item;
             selectedView = view;
         }
