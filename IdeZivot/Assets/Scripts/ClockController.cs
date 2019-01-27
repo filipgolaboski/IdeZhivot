@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ClockController : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class ClockController : MonoBehaviour
     public float smallHandleFinal;
     bool smallHandleFinish = false;
     bool bigHandleFinish = false;
+    public PickableObject passport;
+    public Image[] frames;
+
     public void BigHandleRotation(float rotation)
     {
         float twelvePart = rotation / 30;
@@ -16,7 +20,7 @@ public class ClockController : MonoBehaviour
         if ((diff < 0.2f && diff > 0)  || (diff > -0.2f && diff < 0) || 12f - normalTwelvePart < 0.2f) {
             if (smallHandleFinish)
             {
-                Finish();
+                StartCoroutine(FinishAnim());
             }
             else
             {
@@ -38,7 +42,7 @@ public class ClockController : MonoBehaviour
         {
             if (bigHandleFinish)
             {
-                Finish();
+                StartCoroutine(FinishAnim());
             }
             else
             {
@@ -53,9 +57,18 @@ public class ClockController : MonoBehaviour
 
     public void Finish()
     {
-        //do animation here  
-        PickableObject p = GetComponentInChildren<PickableObject>();
-        if (p != null) { p.PickItem(); }
+        passport.PickItem();
     }
 
+
+    IEnumerator FinishAnim()
+    {
+        for(int i = 1; i < frames.Length; i++)
+        {
+            yield return new WaitForSeconds(0.05f);
+            frames[i - 1].gameObject.SetActive(false);
+            frames[i].gameObject.SetActive(true);
+        }
+        Finish();
+    }
 }
