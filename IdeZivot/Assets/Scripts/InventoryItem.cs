@@ -8,4 +8,5 @@ public class InventoryItem : ScriptableObject
     public Sprite inventoryImage;
     public bool canBeUsed;
     public bool canBeViewed;
+    public InventoryItem itemToBeCombined;
 }
