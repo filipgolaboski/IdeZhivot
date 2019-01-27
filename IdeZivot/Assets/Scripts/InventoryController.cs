@@ -48,11 +48,6 @@ public class InventoryController : MonoBehaviour
 
     public void SelectItem(InventoryItem item, ItemView view)
     {
-        if (item.canBeViewed) {
-            
-        }
-
-
         if (item == currentItem)
         {
             ClearSelectedItem();
