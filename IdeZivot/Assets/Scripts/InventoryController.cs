@@ -8,8 +8,8 @@ public class InventoryController : MonoBehaviour
     public InventoryData inventoryData;
     private ItemView[] itemViews;
     private SceneView currentScene;
-    private int currentItemView = 0;
     private InventoryItem currentItem;
+    private ItemView selectedView;
 
     void Start()
     {
@@ -31,16 +31,50 @@ public class InventoryController : MonoBehaviour
     public void PickUpItem(InventoryItem item)
     {
         inventoryData.AddData(item);
-        itemViews[currentItemView++].SetView(item.inventoryImage, delegate { SelectItem(item); });
+        AddItemView(item);
     }
 
-    public void SelectItem(InventoryItem item)
+    public void AddItemView(InventoryItem item)
     {
-        currentItem = item;
+        foreach (var view in itemViews)
+        {
+            if (view.IsEmpty())
+            {
+                view.SetView(item.inventoryImage, delegate { SelectItem(item, view); });
+                break;
+            }
+        }
+    }
+
+    public void SelectItem(InventoryItem item, ItemView view)
+    {
+        if (item == currentItem)
+        {
+            ClearSelectedItem();
+        }
+        else 
+        {
+            currentItem = item;
+            selectedView = view;
+        }
+    }
+
+    private void ClearSelectedItem()
+    {
+        currentItem = null;
+        selectedView = null;
     }
 
     public void UseItem(UsePlace usePlace)
     {
-        usePlace.UseItem(currentItem);
+        bool isUsed = usePlace.UseItem(currentItem);
+        if (isUsed) {
+            selectedView.ClearView();
+        } 
+        else 
+        {
+            selectedView.ToggleSelectedState();
+            ClearSelectedItem();
+        }
     }
 }
