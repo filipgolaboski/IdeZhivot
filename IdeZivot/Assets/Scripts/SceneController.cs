@@ -33,6 +33,23 @@ public class SceneController : MonoBehaviour
         yield return StartCoroutine(ChangeAlpha(1, 0));
     }
 
+    public void UnloadScene()
+    {
+        StartCoroutine(ChangePreviousWall());
+    }
+
+    private IEnumerator ChangePreviousWall()
+    {
+        yield return StartCoroutine(ChangeAlpha(0, 1));
+        if (stack.Count > 0)
+        {
+            stack.Pop().HideScene();
+        }
+        stack.Peek().ShowScene();
+        inventoryController.ListenForPickUpsOnScene(stack.Peek());
+        yield return StartCoroutine(ChangeAlpha(1, 0));
+    }
+
     private IEnumerator ChangeAlpha(float startAlpha, float endAlpha)
     {
         Color color = blackoutImage.color;

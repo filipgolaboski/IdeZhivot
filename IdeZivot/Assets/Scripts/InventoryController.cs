@@ -1,21 +1,29 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
     public Transform inventoryViewsContainer;
-    public InventoryData inventoryData;
+    public SceneController sceneController;
     public CloseItemView closeItemView;
+    public SceneView closeViewScene;
 
     private ItemView[] itemViews;
     private SceneView currentScene;
     private InventoryItem currentItem;
+    private InventoryItem closeItem;
     private ItemView selectedView;
 
     void Start()
     {
         itemViews = inventoryViewsContainer.GetComponentsInChildren<ItemView>();
+    }
+
+    private void ToggleInventory(bool state)
+    {
+        inventoryViewsContainer.gameObject.SetActive(state);
     }
 
     public void ListenForPickUpsOnScene(SceneView newScene)
@@ -27,22 +35,27 @@ public class InventoryController : MonoBehaviour
         }
         newScene.onPickUpItem = PickUpItem;
         newScene.onUsePlace = UseItem;
+        ToggleInventory(newScene.displayInventory);
+        ResetViewSelectedStates();
+        ClearSelectedItem();
         currentScene = newScene;
     }
 
-    public void PickUpItem(InventoryItem item)
+    private void ResetViewSelectedStates()
     {
-        inventoryData.AddData(item);
-        AddItemView(item);
+        foreach (var view in itemViews)
+        {
+            view.ResetSelectState();
+        }
     }
 
-    public void AddItemView(InventoryItem item)
+    public void PickUpItem(InventoryItem item, Vector2 itemPos)
     {
         foreach (var view in itemViews)
         {
             if (view.IsEmpty())
             {
-                view.SetView(item.inventoryImage, delegate { SelectItem(item, view); });
+                view.SetView(item.inventoryImage, itemPos, delegate { SelectItem(item, view); });
                 break;
             }
         }
@@ -50,21 +63,82 @@ public class InventoryController : MonoBehaviour
 
     public void SelectItem(InventoryItem item, ItemView view)
     {
-        if (item == currentItem)
+        if (item.canBeViewed)
         {
-            ClearSelectedItem();
-            closeItemView.HideView();
-        }
-        else 
-        {
-            if (item.canBeViewed)
+            if (item == closeItem) 
             {
+                closeItem = null;
+                sceneController.UnloadScene();
+            } 
+            else
+            {
+                if (selectedView != null)
+                {
+                    selectedView.ResetSelectState();
+                }
+                
                 closeItemView.SetView(item.inventoryImage, item.itemToBeCombined,
                     (usePlace) => { usePlace.UseItem(currentItem); });
+
+                // view.ResetSelectState();
+                if (closeItem == null)
+                {
+                    sceneController.LoadScene(closeViewScene);
+                } 
+                else if (selectedView != null)
+                {
+                    selectedView.ResetSelectState();
+                }
+                closeItem = item;
+                selectedView = view;
             }
-            currentItem = item;
-            selectedView = view;
         }
+        else
+        {
+            if (currentItem == item)
+            {
+                ClearSelectedItem();
+            } else
+            {
+                if (selectedView != null)
+                {
+                    selectedView.ResetSelectState();
+                }
+
+                currentItem = item;
+                selectedView = view;
+            }
+        }
+
+        // if (item == currentItem && !item.canBeViewed)
+        // {
+        //     ClearSelectedItem();
+        // }
+        // else if (closeItem == item)
+        // {
+        //     sceneController.UnloadScene();
+        //     closeItem = null;
+        // }
+        // else 
+        // {
+        //     if (selectedView != null) {
+        //         selectedView.ToggleSelectedState();
+        //     }
+
+        //     if (item.canBeViewed)
+        //     {
+        //         closeItemView.SetView(item.inventoryImage, item.itemToBeCombined,
+        //             (usePlace) => { usePlace.UseItem(currentItem); });
+
+        //         if (closeItem == null) {
+        //             sceneController.LoadScene(closeViewScene);
+        //         }
+        //         closeItem = item;
+
+        //     }
+        //     currentItem = item;
+        //     selectedView = view;
+        // }
     }
 
     private void ClearSelectedItem()
@@ -73,16 +147,39 @@ public class InventoryController : MonoBehaviour
         selectedView = null;
     }
 
+    public void ClearCloseItem()
+    {
+        closeItem = null;
+    }
+
     public void UseItem(UsePlace usePlace)
     {
-        bool isUsed = usePlace.UseItem(currentItem);
-        if (isUsed) {
-            selectedView.ClearView();
-        } 
-        else 
+        if (currentItem != null)
         {
-            selectedView.ToggleSelectedState();
-            ClearSelectedItem();
+            if (usePlace.neededItem == currentItem) {
+                selectedView.UseItem(usePlace.transform.position, delegate { UseItemOnPlace(usePlace); });
+            } 
+            else
+            {
+                selectedView.ResetSelectState();
+                ClearSelectedItem();
+            }
         }
+    }
+
+    private void UseItemOnPlace(UsePlace usePlace)
+    {
+        bool isUsed = usePlace.UseItem(currentItem);
+        if (isUsed)
+        {
+            closeItemView.HideView();
+            if (usePlace.consumesItem) 
+            {
+                selectedView.ClearView();
+            } else {
+                selectedView.ReturnItem();
+            }
+        }
+        ClearSelectedItem();
     }
 }

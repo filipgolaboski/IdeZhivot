@@ -8,6 +8,7 @@ public class UsePlace : MonoBehaviour
     public InventoryItem neededItem;
     public UnityEvent onItemSuccess;
     public UnityEvent onItemFail;
+    public bool consumesItem;
 
     public delegate void OnUsingPlace(UsePlace place);
     public OnUsingPlace onUsingPlace;
@@ -17,12 +18,10 @@ public class UsePlace : MonoBehaviour
         bool result = item == neededItem;
         if (result) 
         {
-            Debug.Log("Item:" + neededItem.name);
             onItemSuccess.Invoke();
         } 
         else 
         {
-            Debug.Log("Item Failed:" + neededItem.name);
             onItemFail.Invoke();
         }
         return result;

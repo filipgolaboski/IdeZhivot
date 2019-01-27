@@ -375,6 +375,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2328877675986867628}
   - component: {fileID: 2328877675986867635}
+  - component: {fileID: 6417258760911793143}
   m_Layer: 5
   m_Name: TVContainer
   m_TagString: Untagged
@@ -426,6 +427,20 @@ MonoBehaviour:
   - {fileID: 2328877676160045149}
   offState: {fileID: 2328877675713571122}
   tuner: {fileID: 2328877675085943786}
+--- !u!114 &6417258760911793143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2328877675986867629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1254083943, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 2
+  m_AspectRatio: 0.8047527
 --- !u!1 &2328877676134264506
 GameObject:
   m_ObjectHideFlags: 0

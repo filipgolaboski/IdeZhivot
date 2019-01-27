@@ -4,20 +4,16 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class ItemPicked : UnityEvent<InventoryItem> { }
+public class ItemPicked : UnityEvent<InventoryItem, Vector2> { }
 
 public class PickableObject : MonoBehaviour
 {
     public InventoryItem inventoryItem;
     public ItemPicked onItemPicked;
-    bool alreadyAdded = false;
 
     public void PickItem()
     {
-        if (!alreadyAdded)
-        {
-            onItemPicked.Invoke(inventoryItem);
-            Destroy(gameObject);
-        }
+        onItemPicked.Invoke(inventoryItem, transform.position);
+        Destroy(gameObject);
     }
 }
