@@ -22,6 +22,7 @@ public class SceneController : MonoBehaviour
 
     private IEnumerator ChangeWall(SceneView scene)
     {
+        inventoryController.ToggleInventory(false);
         yield return StartCoroutine(ChangeAlpha(0, 1));
         if (stack.Count > 0)
         {

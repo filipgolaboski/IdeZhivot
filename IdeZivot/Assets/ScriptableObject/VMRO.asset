@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b59d07df1a492149a0ee8c0f2cadf0e, type: 3}
   m_Name: VMRO
   m_EditorClassIdentifier: 
-  inventoryImage: {fileID: 21300000, guid: 725649f478efe7042ae367b98dfb8d64, type: 3}
+  inventoryImage: {fileID: 21300000, guid: 86f4457e2b5633a4ea6b9552f9fdd3ce, type: 3}
   canBeUsed: 0
   canBeViewed: 1
   itemToBeCombined: {fileID: 0}

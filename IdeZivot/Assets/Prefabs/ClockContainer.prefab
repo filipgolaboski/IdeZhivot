@@ -946,8 +946,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c4f4aeb325623840ae513f95352daa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bigHandleFinal: 9
-  smallHandleFinal: 1
+  bigHandleFinal: 1
+  smallHandleFinal: 9
   passport: {fileID: 7329284553570625920}
   frames:
   - {fileID: 5603523673754246580}
@@ -975,6 +975,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7329284553274780137}
     m_Modifications:
+    - target: {fileID: 7940736770151749263, guid: a29b7f17b9f35b24c8f82ebbf6bbad50,
+        type: 3}
+      propertyPath: m_Name
+      value: Back Button
+      objectReference: {fileID: 0}
     - target: {fileID: 7873069115747534470, guid: a29b7f17b9f35b24c8f82ebbf6bbad50,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1079,11 +1084,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7940736770151749263, guid: a29b7f17b9f35b24c8f82ebbf6bbad50,
-        type: 3}
-      propertyPath: m_Name
-      value: Back Button
       objectReference: {fileID: 0}
     - target: {fileID: 7424173758141929780, guid: a29b7f17b9f35b24c8f82ebbf6bbad50,
         type: 3}

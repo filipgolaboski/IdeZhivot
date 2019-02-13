@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryImage: {fileID: 21300000, guid: 6635bf68d9626574e94c1d12daac6818, type: 3}
   canBeUsed: 1
-  canBeViewed: 0
+  canBeViewed: 1
+  itemToBeCombined: {fileID: 0}

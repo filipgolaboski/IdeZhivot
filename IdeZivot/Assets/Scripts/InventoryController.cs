@@ -22,7 +22,7 @@ public class InventoryController : MonoBehaviour
         itemViews = inventoryViewsContainer.GetComponentsInChildren<ItemView>();
     }
 
-    private void ToggleInventory(bool state)
+    public void ToggleInventory(bool state)
     {
         inventoryViewsContainer.gameObject.SetActive(state);
     }
@@ -73,25 +73,33 @@ public class InventoryController : MonoBehaviour
             } 
             else
             {
-                if (selectedView != null)
+                if (item.canBeUsed && closeItem != null)
                 {
-                    selectedView.ResetSelectState();
+                    currentItem = item;
+                    selectedView = view;
                 }
-                
-                closeItemView.SetView(item.inventoryImage, item.itemToBeCombined,
-                    (usePlace) => { usePlace.UseItem(currentItem); });
+                else
+                {
+                    if (selectedView != null)
+                    {
+                        selectedView.ResetSelectState();
+                    }
 
-                if (closeItem == null)
-                {
-                    sceneController.LoadScene(closeViewScene);
-                } 
-                else if (selectedView != null)
-                {
-                    selectedView.ResetSelectState();
-                    currentItem = null;
+                    closeItemView.SetView(item.inventoryImage, item.itemToBeCombined,
+                        (usePlace) => { usePlace.UseItem(currentItem); });
+
+                    if (closeItem == null)
+                    {
+                        sceneController.LoadScene(closeViewScene);
+                    }
+                    else if (selectedView != null)
+                    {
+                        selectedView.ResetSelectState();
+                        currentItem = null;
+                    }
+                    closeItem = item;
+                    selectedView = view;
                 }
-                closeItem = item;
-                selectedView = view;
             }
         }
         else
@@ -157,7 +165,7 @@ public class InventoryController : MonoBehaviour
     {
         if (currentItem != null)
         {
-            if (usePlace.neededItem == currentItem) {
+            if (usePlace.neededItem == currentItem && currentItem != null) {
                 selectedView.UseItem(usePlace.transform.position, delegate { UseItemOnPlace(usePlace); });
             } 
             else
